@@ -12,7 +12,8 @@ def get_tokens_and_frequency(token_list):
     tokens = counter.keys()
     tokens_count = counter.values()
 
-    return tokens, tokens_count
+    # return tokens, tokens_count
+    return counter
 
 def compute_frequencies(train_data, emotion, feature, frequency=True):
     """ compute word frequency for pandas datafram column of lists"""
