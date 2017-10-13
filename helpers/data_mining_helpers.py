@@ -1,4 +1,5 @@
 import nltk
+import pandas as pd
 
 """
 Helper functions for data mining lab session 2017 Fall
@@ -26,11 +27,9 @@ def format_labels(target, docs):
 
 def check_missing_values(row):
     """ functions that check and verifies if there are missing values in dataframe """
-    counter = 0
-    for element in row:
-        if element == True:
-            counter+=1
-    return ("The amoung of missing records is: ", counter)
+    # Faster way to summarize if a series contains null values or not
+    # [Ref] https://stackoverflow.com/a/29530601
+    return ("The amoung of missing records is: ", pd.Series.sum(row))
 
 def tokenize_text(text, remove_stopwords=False):
     """
