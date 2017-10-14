@@ -1,4 +1,5 @@
 import nltk
+from nltk.corpus import stopwords
 import pandas as pd
 
 """
@@ -35,9 +36,10 @@ def tokenize_text(text, remove_stopwords=False):
     """
     Tokenize text using the nltk library
     """
+    stop_words = stopwords.words('english')
     tokens = []
     for d in nltk.sent_tokenize(text, language='english'):
         for word in nltk.word_tokenize(d, language='english'):
-            # filters here
-            tokens.append(word)
+            if (word not in stop_words or not remove_stopwords):
+                tokens.append(word)
     return tokens
