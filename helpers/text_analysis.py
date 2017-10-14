@@ -27,23 +27,67 @@ def compute_frequencies(train_data, emotion, feature, frequency=True):
 ###################################
 """ Visualizing Functions """
 ###################################
-def plot_word_frequency(word_list, plot_title):
+def plot_word_frequency(word_dict, plot_title):
     trace1 = {
-        "x": list(word_list[0]),
-        "y": list(word_list[1]),
-        "type": "bar"
+        "x": list(word_dict.keys()),
+        "y": list(word_dict.values()),
+        "type": "bar",
     }
 
     data = go.Data([trace1])
 
     layout = {
         "title": plot_title,
-        "yaxis": {"title": "Frequency"}
+        "yaxis": {"title": "Frequency"},
+        "width":500,
     }
 
     fig = go.Figure(data = data, layout=layout)
     return fig
 
+def plot_compared_word_frequency(word_dict1, word_dict2, plot_title):
+    x = list(word_dict1.keys())
+
+    trace1 = go.Bar(
+        x = x,
+        y = list(word_dict1.values()),
+        text='sample',
+        name='sample',
+        marker=dict(
+            color='rgb(158,202,225)',
+            line=dict(
+                color='rgb(8,48,107)',
+                width=1.5,
+            )
+        ),
+        opacity=0.6
+
+    )
+    trace2 = go.Bar(
+        x = x,
+        y = list(word_dict2.values()),
+        text='original',
+        name='original',
+        marker=dict(
+            color='rgb(58,200,225)',
+            line=dict(
+                color='rgb(8,48,107)',
+                width=1.5,
+            )
+        ),
+        opacity=0.6
+    )
+    data = go.Data([trace1, trace2])
+
+    layout = go.Layout(
+        barmode = 'group',
+        title = plot_title,
+        width = 600,
+    )
+
+    fig = go.Figure(data = data, layout=layout)
+    return fig
+    
 def plot_heat_map(plot_x, plot_y, plot_z):
     """ Helper to plot heat map """
     trace = {
