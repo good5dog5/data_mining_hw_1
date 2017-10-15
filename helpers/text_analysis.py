@@ -39,7 +39,6 @@ def plot_word_frequency(word_dict, plot_title):
     layout = {
         "title": plot_title,
         "yaxis": {"title": "Frequency"},
-        "width":500,
     }
 
     fig = go.Figure(data = data, layout=layout)
