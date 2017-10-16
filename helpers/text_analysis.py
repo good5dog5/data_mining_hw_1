@@ -31,6 +31,7 @@ def plot_word_frequency(word_dict, plot_title):
     trace1 = {
         "x": list(word_dict.keys()),
         "y": list(word_dict.values()),
+        "text":list(word_dict.keys()),
         "type": "bar",
     }
 
@@ -44,6 +45,23 @@ def plot_word_frequency(word_dict, plot_title):
     fig = go.Figure(data = data, layout=layout)
     return fig
 
+def plot_word_frequency_list(x, y, plot_title):
+    trace1 = {
+        "x": x,
+        "y": y,
+        "text":x,
+        "type": "bar",
+    }
+
+    data = go.Data([trace1])
+
+    layout = {
+        "title": plot_title,
+        "yaxis": {"title": "Frequency"},
+    }
+
+    fig = go.Figure(data = data, layout=layout)
+    return fig
 def plot_compared_word_frequency(word_dict1, word_dict2, plot_title):
     x = list(word_dict1.keys())
 
