@@ -14,6 +14,8 @@ W - words
 l - letter
 """
 
+stop_words = stopwords.words('english')
+
 def format_rows(docs):
     """ format the text field and strip special characters """
     D = []
@@ -36,10 +38,21 @@ def tokenize_text(text, remove_stopwords=False):
     """
     Tokenize text using the nltk library
     """
-    stop_words = stopwords.words('english')
     tokens = []
     for d in nltk.sent_tokenize(text, language='english'):
         for word in nltk.word_tokenize(d, language='english'):
             if (word not in stop_words or not remove_stopwords):
                 tokens.append(word)
     return tokens
+
+def trim_irrelevant_words(word_dict, threshold=0):
+    from copy import deepcopy
+    new_dict = deepcopy(word_dict)
+
+    for k,v in list(word_dict.items()):
+
+        # Trim if k in stopwords or v less than threshold
+        if k in stop_words or v < threshold:
+            del new_dict[k]
+
+    return new_dict
